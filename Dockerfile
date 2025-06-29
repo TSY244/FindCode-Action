@@ -16,4 +16,4 @@ COPY run.sh .
 RUN chmod +x FindCode
 RUN chmod +x run.sh
 # 设置入口点，以便运行扫描逻辑 将会拼接action 参数
-ENTRYPOINT ["./app/FindCode/run.sh"]
+ENTRYPOINT ["./run.sh"]
