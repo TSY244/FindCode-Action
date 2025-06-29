@@ -15,5 +15,7 @@ COPY run.sh .
 # 可执行权限
 RUN chmod +x FindCode
 RUN chmod +x run.sh
+RUN ls -l
+RUN find . -name "run"
 # 设置入口点，以便运行扫描逻辑 将会拼接action 参数
 ENTRYPOINT ["./run.sh"]
