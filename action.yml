@@ -1,19 +1,23 @@
 name: FindCode Action
-description: 'Run FindCode scanning tool'
+description: 'Run FindCode scanning tool with volume mount support'
 inputs:
   target-path:
     description: 'Path to the target code'
     required: true
   code-type:
-    description: 'Types of code frameworks'
+    description: 'Types of code frameworks (trpc, gin, go_swagger)'
     required: true
   output-report:
-    description: 'Path to the output report'
+    description: 'Path to the output report (must be inside $GITHUB_WORKSPACE)'
     required: true
   target-code:
     description: 'Fill in the scan logic through functions supported by the rules engine'
     required: false
     default: 'true'
+  debug:
+    description: 'Enable debug mode for verbose logging'
+    required: false
+    default: 'false'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -22,3 +26,7 @@ runs:
     - ${{ inputs.code-type }}
     - ${{ inputs.output-report }}
     - ${{ inputs.target-code }}
+    - ${{ inputs.debug }}
+  # 添加工作目录挂载，确保容器内文件可导出
+  volumes:
+    - ${{ github.workspace }}:${{ github.workspace }}
