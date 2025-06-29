@@ -14,8 +14,8 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y bash
 
 COPY --from=builder /app/FindCode .
-COPY --from=builder /app/etc .
-COPY --from=builder /app/rule .
+COPY --from=builder /app/etc /app/etc
+COPY --from=builder /app/rule /app/rule
 COPY --from=builder /app/run_with_action.sh .
 
 RUN chmod +x /app/run_with_action.sh
