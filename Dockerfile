@@ -1,19 +1,15 @@
-FROM golang:1.20-buster
-
-# 安装依赖
-RUN apt-get update && apt-get install -y git make
-
-# 克隆并编译 FindCode 工具
-RUN git clone https://github.com/TSY244/FindCode.git /FindCode
-WORKDIR /FindCode
+FROM golang:latest
+WORKDIR /app
+# 安装git
+RUN apt-get update && apt-get install -y git
+# 克隆FindCode代码
+RUN git clone https://github.com/TSY244/FindCode.git
+# 执行编译
 RUN make build_cmd
-
-# 设置工作目录
-WORKDIR /github/workspace
-
-# 复制入口脚本
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-# 设置入口点
-ENTRYPOINT ["/entrypoint.sh"]
+# 拷贝run.sh 到 /app
+COPY run.sh /app
+# 可执行权限
+RUN chmod +x FindCode
+RUN chmod +x run.sh
+# 设置入口点，以便运行扫描逻辑 将会拼接action 参数
+ENTRYPOINT ["./run"]
