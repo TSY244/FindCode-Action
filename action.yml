@@ -27,6 +27,3 @@ runs:
     - ${{ inputs.output-report }}
     - ${{ inputs.target-code }}
     - ${{ inputs.debug }}
-  # 添加工作目录挂载，确保容器内文件可导出
-  volumes:
-    - ${{ github.workspace }}:${{ github.workspace }}
