@@ -1,0 +1,25 @@
+name: 'FindCode Scanner'
+description: '使用 FindCode 工具扫描 Go 代码中的 API 定义'
+inputs:
+  code_type:
+    description: '代码框架类型 (trpc/go_swagger/gin)'
+    required: true
+    default: 'go_swagger'
+  go_target:
+    description: '扫描的目标代码路径'
+    required: true
+    default: '.'
+  report_path:
+    description: '报告输出路径'
+    required: false
+    default: '/github/workspace/scan-report.json'
+outputs:
+  report-path:
+    description: '生成的报告路径'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.code_type }}
+    - ${{ inputs.go_target }}
+    - ${{ inputs.report_path }}
