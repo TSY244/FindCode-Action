@@ -18,7 +18,6 @@ inputs:
     description: 'Enable debug mode for verbose logging'
     required: false
     default: 'false'
-
 runs:
   using: 'docker'
   image: 'Dockerfile'
