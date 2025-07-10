@@ -10,7 +10,6 @@ RUN git clone https://github.com/TSY244/FindCode.git .
 
 
 RUN make build_cmd
-
 # 第二阶段：创建运行时环境
 FROM ubuntu:latest AS runtime
 WORKDIR /app
